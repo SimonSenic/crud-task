@@ -1,6 +1,7 @@
 package org.example.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,15 +12,19 @@ public class User {
     private int id;
 
     @Column(name = "username")
+    @NotNull
     private String username;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
     @Column(name = "fullName")
+    @NotNull
     private String fullName;
 
     @Column(name = "age")
+    @NotNull
     private int age;
 
     @OneToMany(fetch = FetchType.LAZY,

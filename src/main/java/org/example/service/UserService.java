@@ -2,11 +2,11 @@ package org.example.service;
 
 import org.example.model.User;
 import org.example.repository.UserRepository;
+import org.example.security.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public List<User> getUsers(){
@@ -28,7 +29,7 @@ public class UserService implements UserDetailsService {
         if (userRepository.findByUsername(user.getUsername()).isPresent())
             throw new IllegalStateException("Account with this username already exists");
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
 

@@ -1,6 +1,7 @@
 package org.example.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -11,9 +12,11 @@ public class Article {
     private int id;
 
     @Column(name = "title")
+    @NotNull
     private String title;
 
     @Column(name = "text")
+    @NotNull
     private String text;
 
     @Column(name = "createdAt")
